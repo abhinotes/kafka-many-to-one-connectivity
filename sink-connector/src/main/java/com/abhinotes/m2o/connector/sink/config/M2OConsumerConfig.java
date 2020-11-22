@@ -32,7 +32,7 @@ public class M2OConsumerConfig {
 
     @Value("${spring.application.name}")
     private String consumerApplicationname;
-    @Value("${messagerouter.sink.environment}")
+    @Value("${m2o.sink.environment}")
     private String environment;
 
     @Bean
@@ -47,7 +47,7 @@ public class M2OConsumerConfig {
 
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG,true);
-        props.put(ConsumerConfig.CLIENT_ID_CONFIG, "MessageRouterClient-"+ environment+ UUID.randomUUID().toString());
+        props.put(ConsumerConfig.CLIENT_ID_CONFIG, "M2OClient-"+ environment+ UUID.randomUUID().toString());
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, jmsMsgForKafkaDeserializer);
         props.put(ConsumerConfig.GROUP_ID_CONFIG, consumerApplicationname);

@@ -53,7 +53,7 @@ public class JMSRegistryHelper {
             } catch (JMSException e) {
                 LOGGER.error(String.format("Error reading mesaage on queue {%s}", queueName));
             } catch (MessageParsingException e) {
-                LOGGER.error(String.format("Error parsing recieved mesaage from queue {%s}, Error : %s", queueName,
+                LOGGER.error(String.format("Error parsing recieved message from queue {%s}, Error : %s", queueName,
                         e.getMessage()));
             }
         });

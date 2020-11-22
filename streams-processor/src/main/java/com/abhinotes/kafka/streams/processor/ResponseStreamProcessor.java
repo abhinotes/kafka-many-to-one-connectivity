@@ -31,7 +31,7 @@ public class ResponseStreamProcessor {
     private static final String RESPONSE = "responseTopicGlobal";
     private static final String ENVIRONMENTBASE = "responseTopic";
 
-    @Bean(name = "MessageRouterKafkaStreamProcessorBean")
+    @Bean(name = "M2OKafkaStreamProcessorBean")
     private void startStreamsProcessor() {
 
         Properties config = new Properties();

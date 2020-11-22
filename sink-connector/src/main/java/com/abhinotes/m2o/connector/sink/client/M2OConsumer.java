@@ -14,23 +14,23 @@ import org.springframework.messaging.handler.annotation.Payload;
 public class M2OConsumer {
     private static final Logger LOGGER = LoggerFactory.getLogger(M2OConsumer.class);
 
-    @Value("${messagerouter.sink.environment}")
+    @Value("${m2o.sink.environment}")
     private String environment;
 
-    @Value("${messagerouter.source.topicbase}")
+    @Value("${m2o.source.topicbase}")
     private String sourceTopicBase;
 
-    @Value("${messagerouter.sink.queue.staging}")
+    @Value("${m2o.sink.queue.staging}")
     private boolean isStagingQueueEnabled;
 
-    @Value("${messagerouter.sink.queue.staging.suffix}")
+    @Value("${m2o.sink.queue.staging.suffix}")
     private String stagingSuffix;
 
     @Autowired
     private JMSClient jmsClient;
 
 
-    @KafkaListener(topicPattern = "${messagerouter.source.topicbase}${messagerouter.sink.environment}")
+    @KafkaListener(topicPattern = "${m2o.source.topicbase}${m2o.sink.environment}")
     public void receive(@Payload JMSMessageForKafka payload, @Headers MessageHeaders headers) {
         StringBuilder destinationJMSQueue = new StringBuilder();
         destinationJMSQueue.append(payload.getJmsqueue());

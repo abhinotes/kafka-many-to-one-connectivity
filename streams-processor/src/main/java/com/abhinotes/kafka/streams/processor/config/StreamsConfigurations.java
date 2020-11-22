@@ -36,7 +36,7 @@ public class StreamsConfigurations {
     @Bean(name = KafkaStreamsDefaultConfiguration.DEFAULT_STREAMS_CONFIG_BEAN_NAME)
     public KafkaStreamsConfiguration kStreamsConfigs() {
         Map<String, Object> config = new HashMap<>();
-        config.put(StreamsConfig.APPLICATION_ID_CONFIG, "MessageRouterApplication");
+        config.put(StreamsConfig.APPLICATION_ID_CONFIG, "M2OApplication");
         config.put(StreamsConfig.PROCESSING_GUARANTEE_CONFIG, StreamsConfig.EXACTLY_ONCE);
         config.put(StreamsConfig.COMMIT_INTERVAL_MS_CONFIG, 30000);
         config.put(StreamsConfig.NUM_STREAM_THREADS_CONFIG, threads);

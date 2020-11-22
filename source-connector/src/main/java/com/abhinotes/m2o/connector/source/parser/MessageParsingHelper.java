@@ -26,8 +26,8 @@ public class MessageParsingHelper {
 
     static {
         InputStream is = null;
-        String propFile = "/"+System.getProperty("message.source")+"MessageQueueParser.properties";
-        LOGGER.info(String.format("Trying loading property file [{%s}] ", propFile));
+        String propFile = "/"+ System.getProperty("message.source")+"MessageQueueParser.properties";
+        LOGGER.info(String.format("Trying loading property file %s ", propFile));
         prop = new Properties();
         is = ClassLoader.class.getResourceAsStream(propFile);
         try {

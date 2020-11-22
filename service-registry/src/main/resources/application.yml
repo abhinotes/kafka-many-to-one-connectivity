@@ -1,7 +1,8 @@
 server:
   port: 8761
-  boot:
-    admin.client.url: http://localhost:8080
+
+
+spring.boot.admin.client.url: http://localhost:8080
 
 management.endpoints.web.exposure.include: "*"
 
@@ -11,7 +12,7 @@ eureka:
     fetch-registry: false
   server:
     renewalPercentThreshold: 0.33
-    #expected-client-renewal-interval-seconds: 5
+    expected-client-renewal-interval-seconds: 5
 
 logging:
   level:
