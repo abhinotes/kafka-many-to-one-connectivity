@@ -1,0 +1,32 @@
+server.port=8770
+spring.application.name=messagerouter-source-connector-int
+message.source=INT
+
+management.endpoints.actuator.enabled=true
+management.endpoint.health.enabled=true
+management.endpoint.service-registry.enabled=true
+management.health.defaults.enabled=true
+
+spring.boot.admin.client.url=http://localhost:8080
+management.endpoints.web.exposure.include=*
+spring.boot.admin.client.instance.metadata.tags.environment=DEV
+management.endpoint.logfile.external-file=/tmp/messagerouter-source-connector.log
+
+  #### KAFKA CONFIGS#######
+state.dir=/Users/magnet/Apps/kafka_2.13-2.6.0/kafka-state
+
+kafka.bootstrap-servers=localhost:9092
+destination.topic=requestTopicGlobal
+mq.extended.info.topic=queueExtendedInfoTopic
+
+  #Executor Thread Configurations
+pool.size=10
+maxpool.size=50
+
+  #IBM MQ Queue Manager Details
+ibm.mq.queueManager=QM1
+#ibm.mq.channel=GALESB.D.SVRCONN
+ibm.mq.connName=localhost(1417)
+ibm.mq.user=
+ibm.mq.password=
+mq.message.pooling.rate=100

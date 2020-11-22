@@ -1,0 +1,15 @@
+server.port: 8750
+spring:
+  application:
+    name: many2one-streams-processor
+  boot:
+    admin.client.url: http://localhost:8080
+
+streams:
+  kafka:
+    bootstrap-servers: localhost:9092
+    replication-factor: 1
+    app.id: M2OStreamsProcessingApplication
+    threads: 1
+
+management.endpoints.web.exposure.include: "*"

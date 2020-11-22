@@ -1,0 +1,20 @@
+server:
+  port: 8761
+  boot:
+    admin.client.url: http://localhost:8080
+
+management.endpoints.web.exposure.include: "*"
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+  server:
+    renewalPercentThreshold: 0.33
+    #expected-client-renewal-interval-seconds: 5
+
+logging:
+  level:
+    com.netflix:
+      eureka: OFF
+      discovery: OFF

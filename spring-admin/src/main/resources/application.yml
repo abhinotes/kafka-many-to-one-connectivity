@@ -1,0 +1,11 @@
+spring:
+  boot:
+    admin:
+      ui:
+        title: "M2O - Admin Dashboard"
+        brand: "Many to One Connectivity Service"
+  application:
+    name: "Spring Admin Dashboard"
+
+server.port: 8080
+management.endpoints.web.exposure.include: "*"
