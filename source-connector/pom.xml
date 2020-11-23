@@ -89,7 +89,7 @@
         <dependency>
             <groupId>com.abhinotes.kafka.m2o</groupId>
             <artifactId>m2o-commons</artifactId>
-            <version>${parent.version}</version>
+            <version>${project.parent.version}</version>
             <scope>compile</scope>
         </dependency>
 

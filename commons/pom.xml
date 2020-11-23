@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.abhinotes.kafka.m2o</groupId>
-    <artifactId>m2o-commons</artifactId>
+    <artifactId>commons</artifactId>
 
 
 </project>

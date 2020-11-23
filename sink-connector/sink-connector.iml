@@ -83,6 +83,6 @@
     <orderEntry type="library" name="Maven: junit:junit:4.12" level="project" />
     <orderEntry type="library" name="Maven: org.hamcrest:hamcrest-core:2.1" level="project" />
     <orderEntry type="library" name="Maven: org.hamcrest:hamcrest:2.1" level="project" />
-    <orderEntry type="module" module-name="m2o-commons" />
+    <orderEntry type="module" module-name="commons" />
   </component>
 </module>

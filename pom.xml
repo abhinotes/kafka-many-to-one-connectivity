@@ -27,7 +27,7 @@
         <module>streams-processor</module>
         <module>spring-admin</module>
         <module>service-registry</module>
-        <module>m2o-commons</module>
+        <module>commons</module>
         <module>source-connector</module>
         <module>sink-connector</module>
     </modules>
