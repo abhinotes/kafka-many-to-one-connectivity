@@ -77,7 +77,6 @@
             <groupId>com.abhinotes.kafka.m2o</groupId>
             <artifactId>commons</artifactId>
             <version>${project.parent.version}</version>
-            <scope>compile</scope>
         </dependency>
 
     </dependencies>

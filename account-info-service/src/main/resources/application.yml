@@ -1,0 +1,25 @@
+server:
+  port: 5555
+
+spring:
+  application:
+    name: m2o-account-info-service
+  boot:
+    admin:
+      client:
+        url: http://localhost:8080
+        instance.metadata.tags.environment: DEV
+
+management:
+  endpoints:
+    actuator.enabled: true
+    health.enabled: true
+    service-registry.enabled: true
+    web.exposure.include: "*"
+
+#### KAFKA CONFIGS#######
+state.dir: "/Users/magnet/Apps/kafka_2.13-2.6.0/kafka-state"
+
+kafka.bootstrap-servers: localhost:9999
+request.topic: requestTopicAccInfo
+response.topic: responseTopicAccInfo

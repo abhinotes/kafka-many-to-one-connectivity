@@ -12,5 +12,11 @@
     <groupId>com.abhinotes.kafka.m2o</groupId>
     <artifactId>commons</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

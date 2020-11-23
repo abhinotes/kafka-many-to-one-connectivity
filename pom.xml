@@ -30,6 +30,7 @@
         <module>commons</module>
         <module>source-connector</module>
         <module>sink-connector</module>
+        <module>account-info-service</module>
     </modules>
 
 
@@ -49,6 +50,13 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.16</version>
+                <scope>provided</scope>
+            </dependency>
+
         </dependencies>
 
     </dependencyManagement>

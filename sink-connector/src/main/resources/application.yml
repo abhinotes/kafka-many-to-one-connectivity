@@ -24,11 +24,7 @@ kafka.bootstrap-servers: localhost:9999
 
 m2o:
   sink:
-    environment: Global
-    queue:
-      staging: true
-      stgSuffix: .STG
-  source:
+    App: AccInfo
     topicbase: requestTopic
 
 #IBM MQ Queue Manager Details

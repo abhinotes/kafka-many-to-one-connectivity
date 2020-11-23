@@ -2,7 +2,7 @@ server.port: 8770
 
 spring:
   application:
-    name: m2o-source-connector-dev
+    name: m2o-source-connector
   boot:
     admin:
       client:
@@ -24,10 +24,10 @@ management:
 state.dir: "/Users/magnet/Apps/kafka_2.13-2.6.0/kafka-state"
 
 kafka.bootstrap-servers: localhost:9999
-destination.topic: requestTopicGlobal
+destination.topic: requestTopicAccInfo
 mq.extended.info.topic: queueExtendedInfoTopic
 
-  #Executor Thread Configurations
+#Executor Thread Configurations
 pool.size: 10
 maxpool.size: 50
 
