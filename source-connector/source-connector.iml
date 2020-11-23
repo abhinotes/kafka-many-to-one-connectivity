@@ -169,6 +169,6 @@
     <orderEntry type="library" name="Maven: org.hamcrest:hamcrest-core:2.1" level="project" />
     <orderEntry type="library" name="Maven: org.hamcrest:hamcrest:2.1" level="project" />
     <orderEntry type="library" name="Maven: com.abhinotes.kafka.streams:m2o-commons:1.0.0-SNAPSHOT" level="project" />
-    <orderEntry type="module" module-name="commons" />
+    <orderEntry type="library" name="Maven: com.abhinotes.kafka.m2o:m2o-commons:1.0.0-SNAPSHOT" level="project" />
   </component>
 </module>

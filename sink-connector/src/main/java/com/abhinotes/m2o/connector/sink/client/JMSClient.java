@@ -1,6 +1,6 @@
 package com.abhinotes.m2o.connector.sink.client;
 
-import com.abhinotes.m2o.connector.exception.SinkConnectorRuntimeException;
+import com.abhinotes.m2o.connector.sink.exception.SinkConnectorRuntimeException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

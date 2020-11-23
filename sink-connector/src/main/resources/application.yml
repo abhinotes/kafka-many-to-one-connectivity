@@ -1,15 +1,35 @@
-server.port=8790
-spring.application.name=m2o-sink-connector-dev
+server.port: 8790
 
-management.endpoint.health.enabled=true
-management.health.defaults.enabled=true
+spring:
+  application:
+    name: m2o-sink-connector
+  boot:
+    admin:
+      client:
+        url: http://localhost:8080
+        instance.metadata.tags.environment: DEV
 
-spring.boot.admin.client.url=http://localhost:8080
-management.endpoints.web.exposure.include=*
+management:
+  endpoints:
+    actuator.enabled: true
+    health.enabled: true
+    service-registry.enabled: true
+    web.exposure.include: "*"
+  #   logfile.external-file: /tmp/m2o-source-connector.log
+  #  health.defaults.enabled: true
 
-kafka.bootstrap-servers=localhost:9999
-m2o.sink.environment=Global
-m2o.source.topicbase=requestTopic
+#### KAFKA CONFIGS#######
+state.dir: "/Users/magnet/Apps/kafka_2.13-2.6.0/kafka-state"
+kafka.bootstrap-servers: localhost:9999
+
+m2o:
+  sink:
+    environment: Global
+    queue:
+      staging: true
+      stgSuffix: .STG
+  source:
+    topicbase: requestTopic
 
 #IBM MQ Queue Manager Details
 ibm:
@@ -21,11 +41,9 @@ ibm:
     password: "passw0rd"
     #message.pooling.rate: 100
 
-m2o.sink.queue.staging=true
-m2o.sink.queue.staging.suffix=.STG
 
-#Executor Thread Configurations
-pool.size=10
-maxpool.size=50
+  #Executor Thread Configurations
+pool.size: 10
+maxpool.size: 50
 
 #logging.level.root=DEBUG

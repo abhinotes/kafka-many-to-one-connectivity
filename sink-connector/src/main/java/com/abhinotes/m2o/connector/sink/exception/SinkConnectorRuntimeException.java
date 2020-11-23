@@ -1,4 +1,4 @@
-package com.abhinotes.m2o.connector.exception;
+package com.abhinotes.m2o.connector.sink.exception;
 
 public class SinkConnectorRuntimeException extends RuntimeException {
 

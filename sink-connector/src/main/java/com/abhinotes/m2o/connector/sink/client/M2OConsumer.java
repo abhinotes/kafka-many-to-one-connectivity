@@ -10,7 +10,9 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.stereotype.Service;
 
+@Service
 public class M2OConsumer {
     private static final Logger LOGGER = LoggerFactory.getLogger(M2OConsumer.class);
 
@@ -23,7 +25,7 @@ public class M2OConsumer {
     @Value("${m2o.sink.queue.staging}")
     private boolean isStagingQueueEnabled;
 
-    @Value("${m2o.sink.queue.staging.suffix}")
+    @Value("${m2o.sink.queue.stgSuffix}")
     private String stagingSuffix;
 
     @Autowired
@@ -39,7 +41,6 @@ public class M2OConsumer {
         }
         LOGGER.info(String.format("From Topic %s%s ,Environment : %s, To JMS Queue %s,Payload : {%s}", sourceTopicBase, environment,payload.getSource(),destinationJMSQueue.toString(), payload.getJmsmessage()));
         jmsClient.send(destinationJMSQueue.toString(), payload.getJmsmessage());
-
     }
 
 }
