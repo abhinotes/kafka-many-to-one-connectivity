@@ -1,6 +1,7 @@
 package com.abhinotes.m2o.connector.source.config;
 
 import com.abhinotes.m2o.commons.constants.ConfigurationConstants;
+import com.abhinotes.m2o.connector.source.client.M2OProducer;
 import com.abhinotes.m2o.connector.source.exception.MessageParsingException;
 import com.abhinotes.m2o.connector.source.parser.MessageParsingHelper;
 import org.slf4j.Logger;
@@ -49,7 +50,7 @@ public class JMSRegistryHelper {
                 String messagePayload = message.getBody(String.class);
                 LOGGER.debug(String.format("Message on Queue {%s} is {%s}>>>>", queueName, messagePayload));
                 kafkaSender.sendMessageFromMQQueueToTopic(destinationTopic,
-                        MessageParsingHelper.getJMSMessageForKafka(messageSource, queueName, messagePayload));
+                        MessageParsingHelper.getM2OMessageFormat(messageSource, queueName, messagePayload));
             } catch (JMSException e) {
                 LOGGER.error(String.format("Error reading mesaage on queue {%s}", queueName));
             } catch (MessageParsingException e) {

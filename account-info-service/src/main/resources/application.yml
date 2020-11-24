@@ -21,5 +21,15 @@ management:
 state.dir: "/Users/magnet/Apps/kafka_2.13-2.6.0/kafka-state"
 
 kafka.bootstrap-servers: localhost:9999
-request.topic: requestTopicAccInfo
-response.topic: responseTopicAccInfo
+
+#kafka-topics --bootstrap-server localhost:9999 --create --topic requestTopicAccInfo --partitions 2 --replication-factor 1
+#kafka-topics --bootstrap-server localhost:9999 --create --topic responseTopicAccInfo --partitions 2 --replication-factor 1
+m2o:
+  kafka:
+    requestTopic: requestTopicAccInfo
+  account:
+    service:
+      reply:
+        topic: responseTopicAccInfo
+
+#kafka-console-consumer --bootstrap-server localhost:9999 --topic responseTopicAccInfo

@@ -1,7 +1,7 @@
 package com.abhinotes.m2o.connector.source.controller;
 
 import com.abhinotes.m2o.connector.source.client.MQListener;
-import com.abhinotes.m2o.connector.source.config.M2OProducer;
+import com.abhinotes.m2o.connector.source.client.M2OProducer;
 import com.abhinotes.m2o.connector.source.exception.MessageParsingException;
 import com.abhinotes.m2o.connector.source.parser.MessageParsingHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ public class MQRestController {
         String responseMessage = "Success";
         try {
             kafkaSender.sendMessageFromMQQueueToTopic(destinationTopic,
-                    MessageParsingHelper.getJMSMessageForKafka(messageSource, queue, message));
+                    MessageParsingHelper.getM2OMessageFormat(messageSource, queue, message));
         } catch (MessageParsingException e) {
             responseMessage = String.format("Request Failed to process with following Error : [{%s}]", e.getMessage());
         }

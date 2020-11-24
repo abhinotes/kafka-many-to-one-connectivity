@@ -41,6 +41,6 @@ ibm:
     password: "passw0rd"
     #message.pooling.rate: 100
 
-#logging:
-#  level:
-#    root: DEBUG
+logging:
+  level:
+    root: DEBUG

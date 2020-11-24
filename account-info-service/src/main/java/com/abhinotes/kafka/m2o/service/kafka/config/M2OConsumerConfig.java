@@ -1,7 +1,7 @@
-package com.abhinotes.m2o.connector.sink.config;
+package com.abhinotes.kafka.m2o.service.kafka.config;
 
+import com.abhinotes.kafka.m2o.service.kafka.client.M2OConsumer;
 import com.abhinotes.m2o.commons.entity.M2OMessageFormat;
-import com.abhinotes.m2o.connector.sink.client.M2OConsumer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.slf4j.Logger;
@@ -32,8 +32,6 @@ public class M2OConsumerConfig {
 
     @Value("${spring.application.name}")
     private String consumerApplicationname;
-    @Value("${m2o.sink.environment}")
-    private String environment;
 
     @Bean
     public ConsumerFactory<String, M2OMessageFormat> consumerFactory() {
@@ -47,7 +45,7 @@ public class M2OConsumerConfig {
 
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG,true);
-        props.put(ConsumerConfig.CLIENT_ID_CONFIG, "M2OClient-"+ environment+ UUID.randomUUID().toString());
+        props.put(ConsumerConfig.CLIENT_ID_CONFIG, "M2OClient-"+ consumerApplicationname+ UUID.randomUUID().toString());
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, jmsMsgForKafkaDeserializer);
         props.put(ConsumerConfig.GROUP_ID_CONFIG, consumerApplicationname);

@@ -1,0 +1,9 @@
+kafka.bootstrap-servers: ###ADD KAFKA Brokers#####
+
+spring:
+  application:
+    name: ###PROVICE YOUR APPLICATION NAME
+
+m2o:
+  kafka:
+    requestTopic: ##Request Topic

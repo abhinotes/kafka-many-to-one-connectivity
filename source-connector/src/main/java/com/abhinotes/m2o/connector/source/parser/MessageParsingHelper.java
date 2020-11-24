@@ -1,7 +1,7 @@
 package com.abhinotes.m2o.connector.source.parser;
 
 import com.abhinotes.m2o.commons.constants.JMSQueueExtendedInfoConstants;
-import com.abhinotes.m2o.commons.entity.JMSMessageForKafka;
+import com.abhinotes.m2o.commons.entity.M2OMessageFormat;
 import com.abhinotes.m2o.connector.source.exception.MessageParsingException;
 import com.abhinotes.m2o.connector.source.exception.SourceConnectorRuntimeException;
 import org.slf4j.Logger;
@@ -25,7 +25,7 @@ public class MessageParsingHelper {
     public static Properties prop;
 
     static {
-        InputStream is = null;
+        InputStream is ;
         String propFile = "/"+ System.getProperty("message.source")+"MessageQueueParser.properties";
         LOGGER.info(String.format("Trying loading property file %s ", propFile));
         prop = new Properties();
@@ -75,9 +75,9 @@ public class MessageParsingHelper {
         }
     }
 
-    public static JMSMessageForKafka getJMSMessageForKafka(String messageSource, String queue, String message)
+    public static M2OMessageFormat getM2OMessageFormat(String messageSource, String queue, String message)
             throws MessageParsingException {
-        JMSMessageForKafka jmsMessageForKafka = null;
+        M2OMessageFormat m2OMessageFormat;
         String messageKey = null;
         String parsingClass = getQueueProperties(queue)[0];
         try {
@@ -86,7 +86,11 @@ public class MessageParsingHelper {
             Method method = messageParser.getDeclaredMethod(JMSQueueExtendedInfoConstants.GET_MESSAGE_KEY, String.class, HashMap.class);
             method.setAccessible(true);
             messageKey = (String) method.invoke(messageParser.newInstance(),message, getParameterKeyMap(queue));
-            jmsMessageForKafka = new JMSMessageForKafka(messageKey, messageSource, queue, message);
+            m2OMessageFormat =
+                    M2OMessageFormat.builder()
+                            .key(messageKey).source(messageSource)
+                            .jmsqueue(queue).jmsmessage(message).build();
+                            //(messageKey, messageSource, queue, message);
 
         } catch (ClassNotFoundException e) {
             throw new MessageParsingException(String.format(
@@ -105,7 +109,7 @@ public class MessageParsingHelper {
             throw new MessageParsingException(
                     String.format("Unable to get an Instance of Parsing Class : {%s}",parsingClass),ie);
         }
-        return jmsMessageForKafka;
+        return m2OMessageFormat;
     }
 
 }

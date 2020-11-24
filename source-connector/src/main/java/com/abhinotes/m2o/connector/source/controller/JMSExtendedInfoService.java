@@ -1,7 +1,7 @@
 package com.abhinotes.m2o.connector.source.controller;
 
 import com.abhinotes.m2o.commons.entity.JMSQueueExtendedInfo;
-import com.abhinotes.m2o.connector.source.config.M2OProducer;
+import com.abhinotes.m2o.connector.source.client.M2OProducer;
 import com.abhinotes.m2o.connector.source.exception.MessageParsingException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;

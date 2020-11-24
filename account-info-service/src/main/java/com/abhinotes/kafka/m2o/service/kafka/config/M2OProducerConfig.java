@@ -1,6 +1,6 @@
-package com.abhinotes.m2o.connector.source.config;
+package com.abhinotes.kafka.m2o.service.kafka.config;
 
-import com.abhinotes.m2o.connector.source.client.M2OProducer;
+import com.abhinotes.kafka.m2o.service.kafka.client.M2OProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;

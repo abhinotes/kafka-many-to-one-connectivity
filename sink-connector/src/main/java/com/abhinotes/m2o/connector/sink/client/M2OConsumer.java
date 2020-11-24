@@ -1,7 +1,7 @@
 package com.abhinotes.m2o.connector.sink.client;
 
 
-import com.abhinotes.m2o.commons.entity.JMSMessageForKafka;
+import com.abhinotes.m2o.commons.entity.M2OMessageFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +27,12 @@ public class M2OConsumer {
 
 
     @KafkaListener(topicPattern = "${m2o.sink.topicbase}${m2o.sink.App}")
-    public void receive(@Payload JMSMessageForKafka payload, @Headers MessageHeaders headers) {
+    public void receive(@Payload M2OMessageFormat payload, @Headers MessageHeaders headers) {
         StringBuilder destinationJMSQueue = new StringBuilder();
         destinationJMSQueue.append(payload.getJmsqueue());
-        LOGGER.info(String.format("From Topic %s%s ,Environment : %s, To JMS Queue %s,Payload : {%s}", sourceTopicBase, app,payload.getSource(),destinationJMSQueue.toString(), payload.getJmsmessage()));
+        LOGGER.info(String.format("From Topic %s%s ,Environment : %s, To JMS Queue %s,Payload : {%s}",
+                sourceTopicBase, app,payload.getSource(),destinationJMSQueue.toString(),
+                payload.getJmsmessage()));
         jmsClient.send(destinationJMSQueue.toString(), payload.getJmsmessage());
     }
 

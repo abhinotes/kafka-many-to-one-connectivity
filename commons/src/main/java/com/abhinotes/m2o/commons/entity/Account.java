@@ -11,11 +11,11 @@ import lombok.ToString;
 @ToString
 public class Account {
 
-    String accountno;
-    String customerName;
-    String location;
-    String ccy;
-    Double balance;
+    private String accountno;
+    private String customerName;
+    private String location;
+    private String ccy;
+    private Double balance;
     @Builder.Default private long queryTimestamp = System.currentTimeMillis();
 
 }

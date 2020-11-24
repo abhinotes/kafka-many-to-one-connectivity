@@ -1,6 +1,6 @@
-package com.abhinotes.m2o.connector.source.config;
+package com.abhinotes.m2o.connector.source.client;
 
-import com.abhinotes.m2o.commons.entity.JMSMessageForKafka;
+import com.abhinotes.m2o.commons.entity.M2OMessageFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ public class M2OProducer {
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
 
-    public void sendMessageFromMQQueueToTopic(String topic, JMSMessageForKafka message) {
+    public void sendMessageFromMQQueueToTopic(String topic, M2OMessageFormat message) {
         LOGGER.debug(String.format(
                 "[sendMessageFromMQQueueToTopic] Sending Message ={%s} to Topic {%s} with message key {%s}",
                 message.toString(), topic, message.getKey()));
