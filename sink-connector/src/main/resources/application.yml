@@ -2,7 +2,7 @@ server.port: 8790
 
 spring:
   application:
-    name: m2o-sink-connector
+    name: sink-connector
   boot:
     admin:
       client:
@@ -24,8 +24,8 @@ kafka.bootstrap-servers: localhost:9999
 
 m2o:
   sink:
-    App: AccInfo
-    topicbase: requestTopic
+    sourceTopic: responseTopicAccInfoRetail
+    destinationQueue: service.accounting.response.retail
 
 #IBM MQ Queue Manager Details
 ibm:

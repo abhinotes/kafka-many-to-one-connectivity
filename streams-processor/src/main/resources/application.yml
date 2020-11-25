@@ -1,9 +1,11 @@
 server.port: 8750
 spring:
   application:
-    name: many2one-streams-processor
+    name: streams-processor
   boot:
     admin.client.url: http://localhost:8080
+
+#### KAFKA CONFIGS#######
 
 streams:
   kafka:
@@ -11,5 +13,14 @@ streams:
     replication-factor: 1
     app.id: M2OStreamsProcessingApplication
     threads: 1
+
+state.dir: "/Users/magnet/Apps/kafka_2.13-2.6.0/kafka-state"
+
+m2o:
+  kafka:
+    topic:
+      request: requestTopicAccInfo
+      response: responseTopicAccInfo
+
 
 management.endpoints.web.exposure.include: "*"

@@ -1,9 +1,6 @@
 package com.abhinotes.m2o.commons.entity;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.HashMap;
 
@@ -11,6 +8,8 @@ import java.util.HashMap;
 @Setter
 @Builder
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class JMSQueueExtendedInfo {
 
     private String queueName;

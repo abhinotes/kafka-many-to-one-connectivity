@@ -1,0 +1,10 @@
+server.port: 8791
+
+spring:
+  application:
+    name: sink-connector-Corp
+
+m2o:
+  sink:
+    sourceTopic: responseTopicAccInfoCorp
+    destinationQueue: service.accounting.response.corp

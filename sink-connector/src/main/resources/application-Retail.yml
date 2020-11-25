@@ -1,0 +1,10 @@
+server.port: 8790
+
+spring:
+  application:
+    name: sink-connector-Retail
+
+m2o:
+  sink:
+    sourceTopic: responseTopicAccInfoRetail
+    destinationQueue: service.accounting.response.retail

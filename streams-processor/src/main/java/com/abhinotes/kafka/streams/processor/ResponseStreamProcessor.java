@@ -1,7 +1,7 @@
 package com.abhinotes.kafka.streams.processor;
 
 import com.abhinotes.m2o.commons.constants.ConfigurationConstants;
-import com.abhinotes.m2o.commons.entity.JMSMessageForKafka;
+import com.abhinotes.m2o.commons.entity.M2OMessageFormat;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
@@ -13,6 +13,8 @@ import org.apache.kafka.streams.kstream.GlobalKTable;
 import org.apache.kafka.streams.kstream.KStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
@@ -26,26 +28,41 @@ public class ResponseStreamProcessor {
 
     private static final String STATE_DIR = "state.dir";
     private static final String APPID = "ManyToOneStreamsProcessor-";
-    private static final String EARLIEST = "earliest";
-    private static final String REQUEST = "requestTopicGlobal";
-    private static final String RESPONSE = "responseTopicGlobal";
-    private static final String ENVIRONMENTBASE = "responseTopic";
+    private static final String EARLIEST = "latest";
+
+    private final String stateDir;
+    private final String accountingRequestTopic;
+    private final String accountingResponseTopic;
+    private final String bootstrapServers;
+
+    @Autowired
+    public ResponseStreamProcessor(@Value("${state.dir}") String stateDir,
+                                   @Value("${m2o.kafka.topic.request}") String accountingRequestTopic,
+                                   @Value("${m2o.kafka.topic.response}") String accountingResponseTopic,
+                                   @Value("${streams.kafka.bootstrap-servers}") String bootstrapServers ) {
+        this.stateDir = stateDir;
+        this.accountingRequestTopic = accountingRequestTopic;
+        this.accountingResponseTopic = accountingResponseTopic;
+        this.bootstrapServers = bootstrapServers;
+
+    }
+
 
     @Bean(name = "M2OKafkaStreamProcessorBean")
     private void startStreamsProcessor() {
 
         Properties config = new Properties();
         config.put(StreamsConfig.APPLICATION_ID_CONFIG, UUID.randomUUID() + APPID);
-        config.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, ConfigurationConstants.BOOTSTRAP_SERVER);
+        config.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         config.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, EARLIEST);
         config.put(StreamsConfig.REQUEST_TIMEOUT_MS_CONFIG, 10000);
-        config.put(STATE_DIR, "/Users/magnet/Apps/kafka_2.13-2.6.0/kafka-state");
+        config.put(STATE_DIR, stateDir);
         config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
         config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass());
 
         StreamsBuilder builder = new StreamsBuilder();
-        GlobalKTable<String, String> requestStream = builder.globalTable(REQUEST);
-        KStream<String, String> responseStream = builder.stream(RESPONSE);
+        GlobalKTable<String, String> requestStream = builder.globalTable(accountingRequestTopic);
+        KStream<String, String> responseStream = builder.stream(accountingResponseTopic);
 
         KStream<String, String> processStream = responseStream.join(requestStream, (key, value) -> key,
                 (res, req) -> getUpdatedResponse(req, res));
@@ -61,19 +78,19 @@ public class ResponseStreamProcessor {
         Runtime.getRuntime().addShutdownHook(new Thread(streamToProcess::close));
     }
 
-    private static String topicNameExtractor(String response) {
+    private  String topicNameExtractor(String response) {
         LOGGER.info(String.format("Topic Name Extractor for payload -> %s", response));
         ObjectMapper objectMapper = new ObjectMapper();
-        JMSMessageForKafka kafkaResponseMessage = null;
+        M2OMessageFormat kafkaResponseMessage = null;
         try {
-            kafkaResponseMessage = objectMapper.readValue(response, JMSMessageForKafka.class);
+            kafkaResponseMessage = objectMapper.readValue(response, M2OMessageFormat.class);
         } catch (JsonProcessingException e) {
             LOGGER.error(String.format("Error while processing incoming message >> %s", e.getMessage()));
         }
         if (kafkaResponseMessage != null) {
-            return ENVIRONMENTBASE.concat(kafkaResponseMessage.getSource());
+            return accountingResponseTopic.concat(kafkaResponseMessage.getSource());
         } else {
-            return ENVIRONMENTBASE.concat("ERROR");
+            return accountingResponseTopic.concat("ERROR");
         }
     }
 
@@ -81,12 +98,12 @@ public class ResponseStreamProcessor {
         LOGGER.info(String.format("Updating Response using [Req],[Resp] :: [%s],[%s]", request, response));
 
         ObjectMapper objectMapper = new ObjectMapper();
-        JMSMessageForKafka kafkaRequestMessage;
-        JMSMessageForKafka kafkaResponseMessage;
+        M2OMessageFormat kafkaRequestMessage;
+        M2OMessageFormat kafkaResponseMessage;
         String updatedResponse = null;
         try {
-            kafkaRequestMessage = objectMapper.readValue(request, JMSMessageForKafka.class);
-            kafkaResponseMessage = objectMapper.readValue(response, JMSMessageForKafka.class);
+            kafkaRequestMessage = objectMapper.readValue(request, M2OMessageFormat.class);
+            kafkaResponseMessage = objectMapper.readValue(response, M2OMessageFormat.class);
             kafkaResponseMessage.setSource(kafkaRequestMessage.getSource());
             updatedResponse = objectMapper.writeValueAsString(kafkaResponseMessage);
         } catch (JsonProcessingException e) {

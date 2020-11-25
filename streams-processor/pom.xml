@@ -63,7 +63,7 @@
 
         <dependency>
             <groupId>com.abhinotes.kafka.m2o</groupId>
-            <artifactId>m2o-commons</artifactId>
+            <artifactId>commons</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 
@@ -84,6 +84,7 @@
             <artifactId>spring-kafka-test</artifactId>
             <scope>test</scope>
         </dependency>
+
 
 
     </dependencies>
