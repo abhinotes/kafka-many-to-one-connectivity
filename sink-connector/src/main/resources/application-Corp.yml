@@ -7,4 +7,4 @@ spring:
 m2o:
   sink:
     sourceTopic: responseTopicAccInfoCorp
-    destinationQueue: service.accounting.response.corp
+    destinationQueue: service.accounting.response.corporate

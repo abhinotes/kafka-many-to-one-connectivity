@@ -61,12 +61,17 @@ public class ResponseStreamProcessor {
         config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass());
 
         StreamsBuilder builder = new StreamsBuilder();
+
+        // Create request as GlobalKTable - As request can be on any partition.
+        // Response topic as KStream - As triggers are response messages
         GlobalKTable<String, String> requestStream = builder.globalTable(accountingRequestTopic);
         KStream<String, String> responseStream = builder.stream(accountingResponseTopic);
 
+        // Define output stream by joining response stream with
         KStream<String, String> processStream = responseStream.join(requestStream, (key, value) -> key,
                 (res, req) -> getUpdatedResponse(req, res));
 
+        // Destination Route derivation and Posting :  Write topic derivation logic (Ex:- topicNameExtractor)
         processStream.to((key, value, recordContext) -> topicNameExtractor(value));
 
         @SuppressWarnings({ "resource" })
