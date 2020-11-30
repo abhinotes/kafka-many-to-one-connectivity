@@ -1,0 +1,8 @@
+{
+    "key": "REFCOR000000021",
+    "source": "Corp",
+    "timestamp": 1606751760097,
+    "jmsqueue": "service.accounting.request.corporate",
+    "jmsmessage": "CORP91236234560REFCOR000000021REQ",
+    "serviceResponse": null
+}

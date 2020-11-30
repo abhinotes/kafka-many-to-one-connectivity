@@ -1,0 +1,19 @@
+{
+    "key": "REFRET000000020",
+    "source": "Retail",
+    "timestamp": 1606755591059,
+    "jmsqueue": null,
+    "jmsmessage": null,
+    "serviceResponse": {
+        "refID": "d53a373f-cac3-4085-8a7a-1bf65b5c346d",
+        "result": "Success",
+        "responseObject": {
+            "accountno": "81235234560",
+            "customerName": "Account Holder 81235234560",
+            "location": "Mumbai",
+            "ccy": "INR",
+            "balance": 100000.0,
+            "queryTimestamp": 1606755591057
+        }
+    }
+}

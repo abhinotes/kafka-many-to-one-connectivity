@@ -17,6 +17,7 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 
+import javax.swing.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -46,12 +47,13 @@ public class M2OConsumerConfig {
 
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG,true);
-        props.put(ConsumerConfig.CLIENT_ID_CONFIG, "M2OClient-"+ UUID.randomUUID().toString());
+        props.put(ConsumerConfig.CLIENT_ID_CONFIG, "M2OClient"+ System.getProperty("spring.profiles.active"));
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, jmsMsgForKafkaDeserializer);
         props.put(ConsumerConfig.GROUP_ID_CONFIG, consumerApplicationname);
         props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
-        props.put(ConsumerConfig.ISOLATION_LEVEL_CONFIG, "read_committed");
+        //props.put(ConsumerConfig.ISOLATION_LEVEL_CONFIG, "read_committed");
+        props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG,true);
         LOGGER.debug(String.format("Consumer Properties : {%s}", props.toString()));
 
         return new DefaultKafkaConsumerFactory<>(props,new StringDeserializer(),jmsMsgForKafkaDeserializer);

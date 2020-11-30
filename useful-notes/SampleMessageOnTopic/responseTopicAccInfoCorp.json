@@ -1,0 +1,19 @@
+{
+    "key": "REFCOR000000021",
+    "source": "Corp",
+    "timestamp": 1606751760110,
+    "jmsqueue": null,
+    "jmsmessage": null,
+    "serviceResponse": {
+        "refID": "9d7ee640-6d55-4dae-9ddf-afe4b109a57c",
+        "result": "Success",
+        "responseObject": {
+            "accountno": "91236234560",
+            "customerName": "Account Holder 91236234560",
+            "location": "Mumbai",
+            "ccy": "INR",
+            "balance": 100000.0,
+            "queryTimestamp": 1606751760110
+        }
+    }
+}
