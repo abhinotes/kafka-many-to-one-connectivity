@@ -23,7 +23,7 @@ management:
 #### KAFKA CONFIGS#######
 state.dir: "/Users/magnet/Apps/kafka_2.13-2.6.0/kafka-state"
 
-kafka.bootstrap-servers: localhost:9999
+kafka.bootstrap-servers: localhost:9092
 destination.topic: requestTopicAccInfo
 mq.extended.info.topic: queueExtendedInfoTopic
 

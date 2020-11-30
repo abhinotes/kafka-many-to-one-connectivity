@@ -20,10 +20,10 @@ management:
 #### KAFKA CONFIGS#######
 state.dir: "/Users/magnet/Apps/kafka_2.13-2.6.0/kafka-state"
 
-kafka.bootstrap-servers: localhost:9999
+kafka.bootstrap-servers: localhost:9092
 
-#kafka-topics --bootstrap-server localhost:9999 --create --topic requestTopicAccInfo --partitions 2 --replication-factor 1
-#kafka-topics --bootstrap-server localhost:9999 --create --topic responseTopicAccInfo --partitions 2 --replication-factor 1
+#kafka-topics --bootstrap-server localhost:9092 --create --topic requestTopicAccInfo --partitions 2 --replication-factor 1
+#kafka-topics --bootstrap-server localhost:9092 --create --topic responseTopicAccInfo --partitions 2 --replication-factor 1
 m2o:
   kafka:
     requestTopic: requestTopicAccInfo
@@ -32,4 +32,4 @@ m2o:
       reply:
         topic: responseTopicAccInfo
 
-#kafka-console-consumer --bootstrap-server localhost:9999 --topic responseTopicAccInfo
+#kafka-console-consumer --bootstrap-server localhost:9092 --topic responseTopicAccInfo

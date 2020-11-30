@@ -1,0 +1,6 @@
+Retail :
+-Dserver.port=8771 -Dmessage.source=Retail -Dspring.application.name=source-connector-Retail
+
+Corporate :
+
+-Dmessage.source=Corp -Dspring.application.name=source-connector-corp

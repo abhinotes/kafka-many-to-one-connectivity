@@ -9,7 +9,7 @@ spring:
 
 streams:
   kafka:
-    bootstrap-servers: localhost:9999
+    bootstrap-servers: localhost:9092
     replication-factor: 1
     app.id: M2OStreamsProcessingApplication
     threads: 1

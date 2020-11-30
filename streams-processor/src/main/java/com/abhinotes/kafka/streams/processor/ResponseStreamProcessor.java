@@ -27,8 +27,8 @@ public class ResponseStreamProcessor {
     private static final Logger LOGGER = LoggerFactory.getLogger(ResponseStreamProcessor.class);
 
     private static final String STATE_DIR = "state.dir";
-    private static final String APPID = "ManyToOneStreamsProcessor-";
-    private static final String EARLIEST = "latest";
+    private static final String APPID = "ManyToOneStreamsProcessor";
+    private static final String LATEST = "latest";
 
     private final String stateDir;
     private final String accountingRequestTopic;
@@ -52,9 +52,10 @@ public class ResponseStreamProcessor {
     private void startStreamsProcessor() {
 
         Properties config = new Properties();
-        config.put(StreamsConfig.APPLICATION_ID_CONFIG, UUID.randomUUID() + APPID);
+        config.put(StreamsConfig.APPLICATION_ID_CONFIG, APPID);
         config.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-        config.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, EARLIEST);
+        //config.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, LATEST);
+        config.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
         config.put(StreamsConfig.REQUEST_TIMEOUT_MS_CONFIG, 10000);
         config.put(STATE_DIR, stateDir);
         config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
